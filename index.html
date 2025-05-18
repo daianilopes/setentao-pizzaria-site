@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzaria Setentão</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="banner-app.jpg" alt="Peça pelo App e Ganhe 10% OFF" class="banner">
+  </header>
+  <main>
+    <section>
+      <h1>Bem-vindo à Pizzaria Setentão</h1>
+      <p>Confira nossos sabores, faça seu pedido com 10% de desconto pelo app e aproveite!</p>
+      <a href="#" class="btn">Pedir com 10% OFF</a>
+    </section>
+  
+<section class="cardapio">
+  <h2>Cardápio de Pizzas Salgadas</h2>
+  <div class="pizza">
+    <h3>Frango</h3>
+    <p>P: R$ 55,00 | M: R$ 65,00 | G: R$ 75,00 | GG: R$ 85,00</p>
+  </div>
+  <div class="pizza">
+    <h3>Frango c/ Catupiry</h3>
+    <p>P: R$ 55,00 | M: R$ 65,00 | G: R$ 75,00 | GG: R$ 85,00</p>
+  </div>
+  <div class="pizza">
+    <h3>Lombo c/ Abacaxi</h3>
+    <p>M: R$ 65,00 | G: R$ 75,00 | GG: R$ 85,00 | XG: R$ 99,99</p>
+  </div>
+</section>
+
+<section class="pizza-meia">
+  <h2>Monte Sua Pizza Meio a Meio</h2>
+  <label>Escolha o 1º sabor:
+    <select id="sabor1">
+      <option value="55">Frango</option>
+      <option value="65">Frango c/ Catupiry</option>
+      <option value="75">Lombo c/ Abacaxi</option>
+    </select>
+  </label>
+  <label>Escolha o 2º sabor:
+    <select id="sabor2">
+      <option value="55">Frango</option>
+      <option value="65">Frango c/ Catupiry</option>
+      <option value="75">Lombo c/ Abacaxi</option>
+    </select>
+  </label>
+  <p>Preço da pizza: R$ <span id="precoFinal">0,00</span></p>
+</section>
+
+<script>
+document.getElementById('sabor1').addEventListener('change', calcularMeia);
+document.getElementById('sabor2').addEventListener('change', calcularMeia);
+
+function calcularMeia() {
+  let s1 = parseFloat(document.getElementById('sabor1').value);
+  let s2 = parseFloat(document.getElementById('sabor2').value);
+  let precoFinal = Math.max(s1, s2).toFixed(2).replace(".", ",");
+  document.getElementById('precoFinal').innerText = precoFinal;
+}
+</script>
+
+
+<section class="agendamento">
+  <h2>Agende seu Kit Festa</h2>
+  <form id="formAgendamento" onsubmit="enviarWhatsApp(); return false;">
+    <label>Nome completo:
+      <input type="text" id="nome" required>
+    </label>
+    <label>Data do evento:
+      <input type="date" id="data" required>
+    </label>
+    <label>Tipo de evento:
+      <input type="text" id="evento" required>
+    </label>
+    <label>Kit desejado:
+      <select id="kit">
+        <option value="Kit 10 pessoas">Kit 10 pessoas</option>
+        <option value="Kit 20 pessoas">Kit 20 pessoas</option>
+        <option value="Kit 30 pessoas">Kit 30 pessoas</option>
+        <option value="Kit 40 pessoas">Kit 40 pessoas</option>
+        <option value="Kit 50 pessoas">Kit 50 pessoas</option>
+      </select>
+    </label>
+    <label>Telefone para contato:
+      <input type="tel" id="telefone" required>
+    </label>
+    <label>Entrega ou Retirada:
+      <select id="modo">
+        <option value="Entrega">Entrega</option>
+        <option value="Retirada">Retirada</option>
+      </select>
+    </label>
+    <label>Observações:
+      <textarea id="obs" rows="3"></textarea>
+    </label>
+    <button type="submit" class="btn">Agendar pelo WhatsApp</button>
+  </form>
+</section>
+
+<script>
+function enviarWhatsApp() {
+  const nome = document.getElementById('nome').value;
+  const data = document.getElementById('data').value;
+  const evento = document.getElementById('evento').value;
+  const kit = document.getElementById('kit').value;
+  const telefone = document.getElementById('telefone').value;
+  const modo = document.getElementById('modo').value;
+  const obs = document.getElementById('obs').value;
+
+  const msg = `Olá, gostaria de agendar um Kit Festa!%0A
+Nome: ${nome}%0A
+Data: ${data}%0A
+Evento: ${evento}%0A
+Kit: ${kit}%0A
+Modo: ${modo}%0A
+Telefone: ${telefone}%0A
+Observações: ${obs}`;
+
+  window.open(`https://wa.me/5524993092389?text=${msg}`, '_blank');
+}
+</script>
+
+</main>
+  <footer>
+    <p>&copy; 2025 Pizzaria Setentão. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
